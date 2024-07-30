@@ -106,13 +106,13 @@ def create_chat_response(content: str, model: str, is_stream: bool = False, is_l
     }
 
 
-@app.get("/v1/models")
+@app.get("/hf/v1/models")
 async def list_models(app_secret: str = Depends(verify_app_secret)):
     models = [Model(id=model) for model in ALL_MODELS]
     return ModelList(data=models)
 
 
-@app.post("/v1/chat/completions")
+@app.post("/hf/v1/chat/completions")
 async def chat_completions(request: ChatRequest, app_secret: str = Depends(verify_app_secret)):
     logger.info(f"Received chat completion request for model: {request.model}")
     logger.info(f"request_message: {request.messages}")
